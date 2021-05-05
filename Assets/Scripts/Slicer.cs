@@ -16,6 +16,7 @@ namespace Assets.Scripts
         public static GameObject[] Slice(Plane plane, GameObject objectToCut)
         {            
             //Get the current mesh and its verts and tris
+            
             Mesh mesh = objectToCut.GetComponent<MeshFilter>().mesh;
             var a = mesh.GetSubMesh(0);
             Sliceable sliceable = objectToCut.GetComponent<Sliceable>();
