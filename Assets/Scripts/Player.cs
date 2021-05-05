@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     private bool IsAnimPlaying;
     private Animation _saberAttack;
-    private Transform _playerTransform;
+    private Rigidbody _playerRigidBody;
     
     #endregion fields
 
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        _playerTransform = transform;
+        _playerRigidBody = transform.GetComponent<Rigidbody>(); ;
     }
 
     private void Update()
@@ -58,12 +58,21 @@ public class Player : MonoBehaviour
         Vector3 direction = Vector3.zero;
 
         float AxisX = Input.GetAxis("Horizontal");
-        float AxisY = Input.GetAxis("Vertical");
+        float AxisZ = Input.GetAxis("Vertical");
 
+        Vector3 velocity = new Vector3(AxisX, 0, AxisZ);
 
-        
-        direction = direction.normalized;
-        _playerTransform.Translate(direction * Time.deltaTime * Speed, Space.World);
+        if(Input.GetMouseButtonDown(0))
+        {
+            _saberAttack.Play();
+        }
+
+        velocity.Normalize();
+
+        velocity = velocity * Speed;
+
+        _playerRigidBody.velocity = velocity;
+
     }
 
     #endregion private methods

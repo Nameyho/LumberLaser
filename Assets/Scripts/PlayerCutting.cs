@@ -62,7 +62,7 @@ public class PlayerCutting : MonoBehaviour
 
     public void UseForce(Collider collider)
     {
-        collider.attachedRigidbody.AddForce(- transform.forward *500);
+        collider.attachedRigidbody.AddForce(transform.forward *500);
     }
 
 
