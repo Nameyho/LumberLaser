@@ -19,13 +19,14 @@ public class Player : MonoBehaviour
     private bool IsAnimPlaying;
     private Animation _saberAttack;
     private Rigidbody _playerRigidBody;
-    
+    private Camera _playerCamera;
+
     #endregion fields
 
 
 
     #region public methods
-    
+
     #endregion public methods
 
 
@@ -39,7 +40,9 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        _playerRigidBody = transform.GetComponent<Rigidbody>(); ;
+        _playerRigidBody = transform.GetComponent<Rigidbody>();
+        _playerCamera = transform.GetComponentInChildren<Camera>() ;
+        
     }
 
     private void Update()
@@ -58,28 +61,32 @@ public class Player : MonoBehaviour
     {
         Vector3 direction = Vector3.zero;
 
-        float AxisX = Input.GetAxis("Horizontal");
-        float AxisZ = Input.GetAxis("Vertical");
+        float AxisX = Input.GetAxis("Horizontal") ;
+        float AxisZ = Input.GetAxis("Vertical") ;
         float LookX = Input.GetAxis("Mouse X");
 
 
 
-        Vector3 movement = new Vector3(AxisX, 0, AxisZ);
+        Vector3 movement = Vector3.zero;
 
         if(Input.GetMouseButtonDown(0))
         {
             _saberAttack.Play();
         }
 
-        movement.Normalize();
+       
+        movement = new Vector3(AxisX, 0f, AxisZ);
 
-        movement = movement * Speed *Time.deltaTime;
+        Vector3 newdir = _playerRigidBody.transform.TransformDirection(movement);
 
-        
 
-        
         _playerRigidBody.rotation = Quaternion.Euler(_playerRigidBody.rotation.eulerAngles + new Vector3(0f, MouseSensitivity * LookX, 0f));
-        _playerRigidBody.position += movement;
+        
+        
+        
+
+        _playerRigidBody.transform.position += newdir.normalized * Speed * Time.deltaTime;
+
     }
 
     #endregion private methods
