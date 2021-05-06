@@ -784,7 +784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732ee305425e93049a47714f0e0e1fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnTime: 1
+  SpawnTime: 20
   _spawners:
   - {fileID: 1921920451}
   - {fileID: 763421300}

@@ -7,6 +7,7 @@ public class AudioPlayer : MonoBehaviour
     #region properties
 
     public float MaxAudioDelay;
+    
 
     #endregion properties
 
@@ -16,6 +17,9 @@ public class AudioPlayer : MonoBehaviour
 
     private AudioSource _audio;
     private float _timeBeforePlay;
+    private Transform _player;
+    private Transform _transform;
+    [SerializeField] private float _distanceFromPlayer;
 
     #endregion fields
 
@@ -33,21 +37,16 @@ public class AudioPlayer : MonoBehaviour
     {
         _timeBeforePlay = 0f;
         _audio = transform.GetComponent<AudioSource>();
+        _player = GameObject.Find("Player").transform;
+        _transform = transform;
     }
 
     // Update is called once per frame
     private void LateUpdate()
     {
-        if (Time.time >= _timeBeforePlay)
-        {
-            _audio.Play();
-            _timeBeforePlay = Time.time + Random.Range(0, MaxAudioDelay);
-        }
+        PlayAudio();
+        
     }
-
-
-
-
 
     #endregion unity messages
 
@@ -55,6 +54,17 @@ public class AudioPlayer : MonoBehaviour
 
     #region private methods
 
+
+    private void PlayAudio()
+    {
+        float distance = Vector3.Distance(_player.position, _transform.position);
+
+        if (Time.time >= _timeBeforePlay && distance <= _distanceFromPlayer)
+        {
+            _audio.Play();
+            _timeBeforePlay = Time.time + Random.Range(0, MaxAudioDelay);
+        }
+    }
 
     #endregion private methods
 }

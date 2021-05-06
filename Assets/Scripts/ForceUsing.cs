@@ -107,6 +107,7 @@ public class ForceUsing : MonoBehaviour
             
             _fixedJoint =  _transform.gameObject.AddComponent<FixedJoint>();
             _fixedJoint.connectedBody = rigidbody;
+            _fixedJoint.anchor = _transform.forward;
             
             _attachedBodies.Add(rigidbody);
         }
