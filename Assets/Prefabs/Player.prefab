@@ -49,7 +49,7 @@ Transform:
   m_GameObject: {fileID: 5316150512437015445}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 72.3, y: 10.1, z: 68.6}
-  m_LocalScale: {x: 10, y: 12.511515, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5316150513625981058}
   - {fileID: 5316150513486287301}
@@ -133,6 +133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hitArea: {fileID: 5316150513625981061}
+  _breakForce: 0
+  _rejectForce: 50
 --- !u!114 &6091066717857160665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb3e5cfc67f38545b22054a722fbefc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 20
+  Speed: 5
 --- !u!54 &5087646866373181219
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -281,7 +283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316150513625981058}
   - component: {fileID: 5316150513625981061}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: HitArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,8 +298,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5316150513625981059}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3.9}
-  m_LocalScale: {x: 1, y: 1, z: 6.124103}
+  m_LocalPosition: {x: 0, y: 0, z: 4.402}
+  m_LocalScale: {x: 3, y: 1, z: 8}
   m_Children: []
   m_Father: {fileID: 5316150512437015449}
   m_RootOrder: 0
@@ -328,7 +330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.25
+      value: 0.52
       objectReference: {fileID: 0}
     - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
       propertyPath: m_LocalPosition.y
@@ -336,7 +338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.29
+      value: 0.52
       objectReference: {fileID: 0}
     - target: {fileID: 3719635888706794418, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
       propertyPath: m_LocalRotation.w

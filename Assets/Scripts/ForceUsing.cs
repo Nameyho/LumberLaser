@@ -6,6 +6,11 @@ public class ForceUsing : MonoBehaviour
 {
     #region Fields
     [SerializeField] private Collider _hitArea;
+    private Transform _transform;
+    private FixedJoint _fixedJoint;
+    
+    private List<Rigidbody> _attachedBodies;
+    [SerializeField] private float _rejectForce;
     #endregion
 
 
@@ -14,6 +19,12 @@ public class ForceUsing : MonoBehaviour
     private void FixedUpdate()
     {
         DetectTargets();
+    }
+
+    private void Awake()
+    {
+        _transform = transform;
+        _attachedBodies = new List<Rigidbody>();
     }
     #endregion
 
@@ -26,24 +37,22 @@ public class ForceUsing : MonoBehaviour
         Collider[] colliderArray = Physics.OverlapBox(_hitArea.transform.position, colliderSize);
         foreach(Collider collider in colliderArray)
         {
-            if(collider == _hitArea)
-            {
-                continue;
-            }
-
+            
            if(collider.gameObject.layer == 3)
             {
                 
                 if (Input.GetMouseButton(1))
                 {
-                    Debug.Log("Découper aux sabres");
-                    CutWithLaser();
+                    //Attirer vers soi
+                   
+                    Attract(collider);
                 }
 
-                if (Input.GetKey(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    Debug.Log("Utilisation de la force");
-                    UseForce(collider);
+                    //repousser avec la force
+                    
+                    Reject(collider);
 
                     
                 }
@@ -55,16 +64,54 @@ public class ForceUsing : MonoBehaviour
         }
     }
 
-    public void CutWithLaser()
-    {
 
+
+    private void Reject(Collider collider)
+    {
+        if(_fixedJoint != null)
+        {
+            Destroy(_fixedJoint);
+            collider.attachedRigidbody.AddForce(transform.forward * _rejectForce, ForceMode.Impulse);
+        }
+        else
+        {
+
+            collider.attachedRigidbody.AddForce(transform.forward * _rejectForce, ForceMode.Impulse);
+            
+        }
+        
+        
     }
 
-    public void UseForce(Collider collider)
-    {
-        collider.attachedRigidbody.AddForce(transform.forward *500);
-    }
 
+
+    private void Attract(Collider collider)
+    {
+        Rigidbody rigidbody = collider.attachedRigidbody;
+        float distance = Vector3.Distance(_transform.position, rigidbody.position);
+        
+        
+        if (_attachedBodies.Contains(rigidbody))
+        {
+            
+            return;
+        }
+
+        if(distance >= 4)
+        {
+            
+            rigidbody.AddForce(-transform.forward * 1000,ForceMode.Impulse);
+        }
+        else
+        {
+            
+            _fixedJoint =  _transform.gameObject.AddComponent<FixedJoint>();
+            _fixedJoint.connectedBody = rigidbody;
+            
+            _attachedBodies.Add(rigidbody);
+        }
+       
+    }
 
     #endregion
 
