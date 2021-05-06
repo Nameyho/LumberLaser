@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCutting : MonoBehaviour
+public class ForceUsing : MonoBehaviour
 {
     #region Fields
     [SerializeField] private Collider _hitArea;
