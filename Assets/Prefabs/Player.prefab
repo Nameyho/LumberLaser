@@ -133,7 +133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hitArea: {fileID: 5316150513625981061}
-  _breakForce: 0
   _rejectForce: 50
 --- !u!114 &6091066717857160665
 MonoBehaviour:
@@ -372,10 +371,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lighsaber
       objectReference: {fileID: 0}
+    - target: {fileID: 4910991347323683640, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ab9e7fa138638b44b8d0f90275d54a85, type: 2}
+    - target: {fileID: 5501630219564572640, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7811457834246155013, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8803948589670859403, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 562efa8cde1089e40a4ca3ef93bd44a7, type: 2}
+    - target: {fileID: 8803948589670859403, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 562efa8cde1089e40a4ca3ef93bd44a7, type: 2}
     m_RemovedComponents:
     - {fileID: 372381756121001047, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ca6bd3aee076f4f888edcb4a6b2a6d00, type: 3}

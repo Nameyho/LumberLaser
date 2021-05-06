@@ -160,7 +160,7 @@ public class Lighsaber : MonoBehaviour
             plane = plane.flipped;
         }
 
-        if (!_animation.isPlaying) return;
+        if (!_animation.isPlaying || other.gameObject.tag != "Tree") return;
 
         GameObject[] slices = Slicer.Slice(plane, other.gameObject);
         Destroy(other.gameObject);
