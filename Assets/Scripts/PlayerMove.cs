@@ -63,7 +63,7 @@ public class PlayerMove : MonoBehaviour
         
         Vector3 movement = Vector3.zero;
 
-        movement = new Vector3(AxisX, 0f, AxisZ);
+        movement = new Vector3(AxisX, Vector3.zero.y, AxisZ);
 
         Vector3 newdir = _playerTransform.TransformDirection(movement);
 
