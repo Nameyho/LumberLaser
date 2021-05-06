@@ -46,9 +46,13 @@ public class Lighsaber : MonoBehaviour
     private Vector3 _triggerEnterTipPosition;
     private Vector3 _triggerEnterBasePosition;
     private Vector3 _triggerExitTipPosition;
+    private Animation _animation;
 
     void Start()
     {
+
+        _animation = transform.GetComponentInChildren<Animation>();
+
         //Init mesh and triangles
         _meshParent.transform.position = Vector3.zero;
         _mesh = new Mesh();
@@ -119,6 +123,7 @@ public class Lighsaber : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!_animation.isPlaying) return;
         _triggerEnterTipPosition = _tip.transform.position;
         _triggerEnterBasePosition = _base.transform.position;
     }
@@ -154,6 +159,8 @@ public class Lighsaber : MonoBehaviour
         {
             plane = plane.flipped;
         }
+
+        if (!_animation.isPlaying) return;
 
         GameObject[] slices = Slicer.Slice(plane, other.gameObject);
         Destroy(other.gameObject);

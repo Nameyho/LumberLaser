@@ -433,6 +433,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1604606538878161938, guid: de6d8eec748bf5c42a53c20a871e1794, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1604606538878161938, guid: de6d8eec748bf5c42a53c20a871e1794, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5313587320981327013, guid: de6d8eec748bf5c42a53c20a871e1794, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5313587320981327013, guid: de6d8eec748bf5c42a53c20a871e1794, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5313587320981327013, guid: de6d8eec748bf5c42a53c20a871e1794, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.342
+      objectReference: {fileID: 0}
     - target: {fileID: 5313587320981327013, guid: de6d8eec748bf5c42a53c20a871e1794, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.71949834
@@ -470,8 +490,12 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5316150512437015449, guid: de6d8eec748bf5c42a53c20a871e1794, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 16.036
+      objectReference: {fileID: 0}
+    - target: {fileID: 5316150512437015449, guid: de6d8eec748bf5c42a53c20a871e1794, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 72.3
+      value: 72.7
       objectReference: {fileID: 0}
     - target: {fileID: 5316150512437015449, guid: de6d8eec748bf5c42a53c20a871e1794, type: 3}
       propertyPath: m_LocalPosition.y
@@ -479,7 +503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5316150512437015449, guid: de6d8eec748bf5c42a53c20a871e1794, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 68.6
+      value: 69
       objectReference: {fileID: 0}
     - target: {fileID: 5316150512437015449, guid: de6d8eec748bf5c42a53c20a871e1794, type: 3}
       propertyPath: m_LocalRotation.w

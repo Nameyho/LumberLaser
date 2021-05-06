@@ -56,16 +56,18 @@ public class PlayerLook : MonoBehaviour
         float LookX = Input.GetAxis("Mouse X");
         float LookY = Input.GetAxis("Mouse Y");
 
-        float yRotate = 0.0f;
-
-        float minAngle = -45.0f;
-        float maxAngle = 45.0f;
-
-        yRotate += Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
-        yRotate = Mathf.Clamp(yRotate, minAngle, maxAngle);
         
 
-        _playerTransform.rotation = Quaternion.Euler(_playerTransform.rotation.eulerAngles + new Vector3(yRotate, MouseSensitivity * LookX, 0f));
+        float minAngle = -45f;
+        float maxAngle = 45f;
+
+        var yRotate = LookY * MouseSensitivity * Time.deltaTime;
+        
+        
+        yRotate = Mathf.Clamp(yRotate, minAngle, maxAngle);
+
+        
+        _playerTransform.rotation = Quaternion.Euler(_playerTransform.rotation.eulerAngles + new Vector3(0f, MouseSensitivity * LookX, 0f));
         
     }
 

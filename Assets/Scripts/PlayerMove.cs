@@ -44,10 +44,15 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        DetectInput();
+       
         
     }
-    
+
+    private void LateUpdate()
+    {
+        DetectInput();
+    }
+
 
     #endregion unity messages
 
@@ -63,7 +68,7 @@ public class PlayerMove : MonoBehaviour
         
         Vector3 movement = Vector3.zero;
 
-        movement = new Vector3(AxisX, Vector3.zero.y, AxisZ);
+        movement = new Vector3(AxisX, 0f, AxisZ);
 
         Vector3 newdir = _playerTransform.TransformDirection(movement);
 
@@ -78,7 +83,7 @@ public class PlayerMove : MonoBehaviour
             _speed /= 2;
         }
 
-        _playerTransform.position += newdir.normalized * _speed * Time.deltaTime;
+        _playerTransform.position += newdir * _speed * Time.deltaTime;
     }
 
     #endregion private methods
