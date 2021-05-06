@@ -30,6 +30,7 @@ namespace Assets.Scripts
 
             GameObject positiveObject = CreateMeshGameObject(objectToCut);
             positiveObject.name = string.Format("{0}_positive", objectToCut.name);
+            positiveObject.layer = 3;
 
             GameObject negativeObject = CreateMeshGameObject(objectToCut);
             negativeObject.name = string.Format("{0}_negative", objectToCut.name);

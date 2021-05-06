@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     #region properties
 
-    public GameObject Saber;
+   
     public float Speed;
-    public float MouseSensitivity;
+    
 
     #endregion properties
 
@@ -16,8 +16,8 @@ public class Player : MonoBehaviour
 
     #region fields
 
-    private Animation _saberAttack;
-    private Transform _transform;
+    private Transform _playerTransform;
+    private float _speed;
     
     #endregion fields
 
@@ -32,13 +32,14 @@ public class Player : MonoBehaviour
     #region unity messages
     private void Awake()
     {
-        _saberAttack = Saber.gameObject.GetComponent<Animation>();
+        
         
     }
 
     private void Start()
     {
-        _transform = transform ;
+        _playerTransform = transform ;
+        _speed = Speed;
     }
 
     private void Update()
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
         DetectInput();
         
     }
+    
 
     #endregion unity messages
 
@@ -55,33 +57,28 @@ public class Player : MonoBehaviour
 
     private void DetectInput()
     {
-        Vector3 direction = Vector3.zero;
-
+      
         float AxisX = Input.GetAxis("Horizontal");
         float AxisZ = Input.GetAxis("Vertical");
-        float LookX = Input.GetAxis("Mouse X");
-
-
-
+        
         Vector3 movement = Vector3.zero;
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            _saberAttack.Play();
-        }
-
 
         movement = new Vector3(AxisX, 0f, AxisZ);
 
-        Vector3 newdir = _transform.TransformDirection(movement);
+        Vector3 newdir = _playerTransform.TransformDirection(movement);
 
+        
 
-        _transform.rotation = Quaternion.Euler(_transform.rotation.eulerAngles + new Vector3(0f, MouseSensitivity * LookX, 0f));
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _speed *= 2;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _speed /= 2;
+        }
 
-
-
-
-        _transform.position += newdir.normalized * Speed * Time.deltaTime;
+        _playerTransform.position += newdir.normalized * _speed * Time.deltaTime;
     }
 
     #endregion private methods
