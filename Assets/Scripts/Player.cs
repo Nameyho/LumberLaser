@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 
     public GameObject Saber;
     public float Speed;
+    public float MouseSensitivity;
 
     #endregion properties
 
@@ -15,9 +16,8 @@ public class Player : MonoBehaviour
 
     #region fields
 
-    private bool IsAnimPlaying;
     private Animation _saberAttack;
-    private Rigidbody _playerRigidBody;
+    private Transform _transform;
     
     #endregion fields
 
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        _playerRigidBody = transform.GetComponent<Rigidbody>(); ;
+        _transform = transform ;
     }
 
     private void Update()
@@ -59,20 +59,29 @@ public class Player : MonoBehaviour
 
         float AxisX = Input.GetAxis("Horizontal");
         float AxisZ = Input.GetAxis("Vertical");
+        float LookX = Input.GetAxis("Mouse X");
 
-        Vector3 velocity = new Vector3(AxisX, 0, AxisZ);
 
-        if(Input.GetMouseButtonDown(0))
+
+        Vector3 movement = Vector3.zero;
+
+        if (Input.GetMouseButtonDown(0))
         {
             _saberAttack.Play();
         }
 
-        velocity.Normalize();
 
-        velocity = velocity * Speed;
+        movement = new Vector3(AxisX, 0f, AxisZ);
 
-        _playerRigidBody.velocity = velocity;
+        Vector3 newdir = _transform.TransformDirection(movement);
 
+
+        _transform.rotation = Quaternion.Euler(_transform.rotation.eulerAngles + new Vector3(0f, MouseSensitivity * LookX, 0f));
+
+
+
+
+        _transform.position += newdir.normalized * Speed * Time.deltaTime;
     }
 
     #endregion private methods
