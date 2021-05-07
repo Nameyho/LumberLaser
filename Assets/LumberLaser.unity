@@ -791,7 +791,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5673853871866381144, guid: c34e139cf8ca9bc488cf41e0040c7d10, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c34e139cf8ca9bc488cf41e0040c7d10, type: 3}
 --- !u!1001 &565519228
 PrefabInstance:
@@ -1494,7 +1495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d21113f7051994991533fd0c9ee969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delayBetweenSpawn: 1
+  _delayBetweenSpawn: 2
   _TreePrefab: {fileID: 6147531797642450635, guid: 952ebedfaa358724796eb44d88beea06, type: 3}
 --- !u!1 &1243015844
 GameObject:
@@ -1608,6 +1609,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 952ebedfaa358724796eb44d88beea06, type: 3}
+--- !u!1 &1318068894 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5673853871866381142, guid: c34e139cf8ca9bc488cf41e0040c7d10, type: 3}
+  m_PrefabInstance: {fileID: 565120326}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1318068896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318068894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee27ebc516f0b54989a8fe9117686f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CurrentStunCount: {fileID: 11400000, guid: 146fef429a0eed64491f45a8ef85eabd, type: 2}
 --- !u!4 &1363635127 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6147531797642450639, guid: 952ebedfaa358724796eb44d88beea06, type: 3}
@@ -1953,7 +1972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732ee305425e93049a47714f0e0e1fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnTime: 10
+  SpawnTime: 0
   EnemiesToSpawn: {fileID: 11400000, guid: 0cc4c3b9a6845204c9df7d4dec4ae7cc, type: 2}
   _spawners:
   - {fileID: 1921920451}

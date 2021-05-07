@@ -18,10 +18,9 @@ public class EnemySpawn : MonoBehaviour
     private Transform _playerTransform;
     [SerializeField] private List<Transform> _spawners;
     [SerializeField] private Transform _enemyPrefab;
-    [SerializeField] private IntVariable _enemiesLeft;
-    private int _enemiesToSpawn;
+    
     private float _nextSpawnTime;
-    private int _enemisLeftToSpawn;
+    private int _enemiesLeftToSpawn;
 
     #endregion fields
 
@@ -38,15 +37,17 @@ public class EnemySpawn : MonoBehaviour
     private void Start()
     {
         _nextSpawnTime = 0f;
+        _enemiesLeftToSpawn = EnemiesToSpawn.value;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (Time.time >= _nextSpawnTime)
+        if (Time.time >= _nextSpawnTime && _enemiesLeftToSpawn > 0)
         {
             SpawnEnemy();
             _nextSpawnTime = Time.time + SpawnTime;
+            _enemiesLeftToSpawn--;
         }
     }
 

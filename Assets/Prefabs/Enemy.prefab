@@ -162,7 +162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyStartHP: {fileID: 11400000, guid: 2ef4e2a1d74cbdc4daeea05e5378ab14, type: 2}
-  _enemyCurrentHP: {fileID: 11400000, guid: 951403eaec7acc84aafde050668da596, type: 2}
   _StunCount: {fileID: 11400000, guid: 146fef429a0eed64491f45a8ef85eabd, type: 2}
   HitDelay: 3
   _impactForce: 5
