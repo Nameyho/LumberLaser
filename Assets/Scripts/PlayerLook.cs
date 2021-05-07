@@ -15,6 +15,7 @@ public class PlayerLook : MonoBehaviour
     #region fields
 
     private Transform _playerTransform;
+    private Transform _playerCamera;
     
     #endregion fields
 
@@ -36,6 +37,7 @@ public class PlayerLook : MonoBehaviour
     private void Start()
     {
         _playerTransform = transform ;
+        _playerCamera = GameObject.Find("Main Camera").transform;
     }
 
     private void Update()
@@ -54,20 +56,23 @@ public class PlayerLook : MonoBehaviour
     {
        
         float LookX = Input.GetAxis("Mouse X");
-        float LookY = Input.GetAxis("Mouse Y");
+        float LookY = -Input.GetAxis("Mouse Y");
 
         
 
-        float minAngle = -45f;
-        float maxAngle = 45f;
+        float minAngle = -90f;
+        float maxAngle = 90f;
 
-        var yRotate = LookY * MouseSensitivity * Time.deltaTime;
+        var yRotate = LookY * MouseSensitivity ;
         
         
         yRotate = Mathf.Clamp(yRotate, minAngle, maxAngle);
 
         
-        _playerTransform.rotation = Quaternion.Euler(_playerTransform.rotation.eulerAngles + new Vector3(0f, MouseSensitivity * LookX, 0f));
+        _playerTransform.RotateAround(_playerTransform.position, Vector3.up, MouseSensitivity * LookX);
+
+        //_playerCamera.RotateAround(_playerCamera.position, _playerCamera.right, yRotate);
+
         
     }
 
