@@ -18,6 +18,8 @@ public class EnemySpawn : MonoBehaviour
     private Transform _playerTransform;
     [SerializeField] private List<Transform> _spawners;
     [SerializeField] private Transform _enemyPrefab;
+    [SerializeField] private IntVariable _enemiesLeft;
+    private int _enemiesToSpawn;
     private float _nextSpawnTime;
     private int _enemisLeftToSpawn;
 
@@ -36,13 +38,12 @@ public class EnemySpawn : MonoBehaviour
     private void Start()
     {
         _nextSpawnTime = 0f;
-        _enemisLeftToSpawn = EnemiesToSpawn.value;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (Time.time >= _nextSpawnTime && _enemisLeftToSpawn >0)
+        if (Time.time >= _nextSpawnTime)
         {
             SpawnEnemy();
             _nextSpawnTime = Time.time + SpawnTime;
@@ -54,7 +55,6 @@ public class EnemySpawn : MonoBehaviour
 
         Vector3 randomPosition = _spawners[Random.Range(0, _spawners.Count)].position;
         Instantiate(_enemyPrefab, randomPosition + Vector3.up * _enemyPrefab.localScale.y, Quaternion.identity);
-        _enemisLeftToSpawn--;
        
     }
 
