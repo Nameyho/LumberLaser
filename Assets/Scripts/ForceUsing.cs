@@ -6,11 +6,14 @@ public class ForceUsing : MonoBehaviour
 {
     #region Fields
     [SerializeField] private Collider _hitArea;
-    private Transform _transform;
-    private FixedJoint _fixedJoint;
-    
+    private Transform _transform; 
     private List<Rigidbody> _attachedBodies;
     [SerializeField] private float _rejectForce;
+    [SerializeField] private float _jointDistance;
+    [SerializeField] private float _attractForce;
+    private bool _mustAttract;
+    private bool _mustReject;
+
     #endregion
 
 
@@ -18,7 +21,24 @@ public class ForceUsing : MonoBehaviour
 
     private void FixedUpdate()
     {
-        DetectTargets();
+        Vector3 colliderSize = _hitArea.bounds.extents;
+
+        Collider[] colliderArray = Physics.OverlapBox(_hitArea.transform.position, colliderSize);
+        if (_mustAttract)
+        {
+            Attract(colliderArray);
+            _mustAttract = false;
+        }
+        if(_mustReject)
+        {
+            Reject(colliderArray);
+            _mustReject = false;
+        }
+    }
+
+    private void Update()
+    {
+        DetectInputs();      
     }
 
     private void Awake()
@@ -30,88 +50,72 @@ public class ForceUsing : MonoBehaviour
 
 
     #region private methods
-    private void DetectTargets()
+    private void DetectInputs()
     {
-        Vector3 colliderSize = _hitArea.bounds.extents;
-
-        Collider[] colliderArray = Physics.OverlapBox(_hitArea.transform.position, colliderSize);
-        foreach(Collider collider in colliderArray)
+        if (Input.GetMouseButton(1))
         {
+            //Attirer vers soi
+            _mustAttract = true;
+            Debug.DrawRay(transform.position, transform.forward * 3, Color.blue,1f);
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //repousser avec la force
+             _mustReject = true;
+            Debug.DrawRay(transform.position,transform.forward * 3,Color.red,1f);
+        }  
+    }
+
+
+
+    private void Reject(Collider[] colliderArray)
+    {
+        foreach (Collider collider in colliderArray)
+        {
+
+            if (collider.gameObject.layer != 3) continue;
+
+            Destroy(collider.GetComponent<FixedJoint>());
+            _attachedBodies.Remove(collider.attachedRigidbody);
+            collider.attachedRigidbody.AddForce(transform.forward * _rejectForce, ForceMode.Impulse);
             
-           if(collider.gameObject.layer == 3)
+        }
+    }
+
+
+
+    private void Attract(Collider[] colliderArray)
+    {
+        foreach (Collider collider in colliderArray)
+        {
+            Rigidbody rigidbody = collider.attachedRigidbody;
+            float distance = Vector3.Distance(_transform.position, rigidbody.position);
+        
+        
+            if (_attachedBodies.Contains(rigidbody) || collider.gameObject.layer != 3)
             {
-                
-                if (Input.GetMouseButton(1))
-                {
-                    //Attirer vers soi
-                   
-                    Attract(collider);
-                }
-
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    //repousser avec la force
-                    
-                    Reject(collider);
-
-                    
-                }
+            
+                continue;
             }
-        
 
+            if(distance >= _jointDistance)
+            {
             
-
-        }
-    }
-
-
-
-    private void Reject(Collider collider)
-    {
-        if(_fixedJoint != null)
-        {
-            Destroy(_fixedJoint);
-            collider.attachedRigidbody.AddForce(transform.forward * _rejectForce, ForceMode.Impulse);
-        }
-        else
-        {
-
-            collider.attachedRigidbody.AddForce(transform.forward * _rejectForce, ForceMode.Impulse);
+                rigidbody.AddForce(-transform.forward * _attractForce,ForceMode.Force);
+            }
+            else
+            {
             
-        }
-        
-        
-    }
-
-
-
-    private void Attract(Collider collider)
-    {
-        Rigidbody rigidbody = collider.attachedRigidbody;
-        float distance = Vector3.Distance(_transform.position, rigidbody.position);
-        
-        
-        if (_attachedBodies.Contains(rigidbody))
-        {
+                FixedJoint fixedJoint =  collider.gameObject.AddComponent<FixedJoint>();
+                fixedJoint.connectedBody = GetComponent<Rigidbody>();
+                fixedJoint.anchor = _hitArea.bounds.center;
             
-            return;
-        }
-
-        if(distance >= 4)
-        {
-            
-            rigidbody.AddForce(-transform.forward * 1000,ForceMode.Impulse);
-        }
-        else
-        {
-            
-            _fixedJoint =  _transform.gameObject.AddComponent<FixedJoint>();
-            _fixedJoint.connectedBody = rigidbody;
-            _fixedJoint.anchor = _transform.forward;
-            
-            _attachedBodies.Add(rigidbody);
-        }
+                _attachedBodies.Add(rigidbody);
+            }
        
+        }
     }
 
     #endregion
