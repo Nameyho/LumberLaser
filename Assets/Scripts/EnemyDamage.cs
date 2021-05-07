@@ -8,6 +8,7 @@ public class EnemyDamage : MonoBehaviour
 
     public IntVariable _enemyStartHP;
     public IntVariable _enemyCurrentHP;
+    public IntVariable _StunCount;
 
     #endregion properties
 
@@ -47,6 +48,7 @@ public class EnemyDamage : MonoBehaviour
             if (_enemyCurrentHP.value <= 0)
             {
                 Destroy(_transform.gameObject);
+                _StunCount.value++;
             }
         }
         
