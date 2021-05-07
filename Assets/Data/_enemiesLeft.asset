@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed510c102cc16a7458c70e3637c72d47, type: 3}
-  m_Name: _StunCount
+  m_Name: _enemiesLeft
   m_EditorClassIdentifier: 
-  value: 6
+  value: 0
