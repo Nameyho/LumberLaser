@@ -31,7 +31,8 @@ public class ForceUsing : MonoBehaviour
         }
         if(_mustReject)
         {
-            Reject(colliderArray);
+            IEnumerator rejectCoroutine = RejectCoroutine(colliderArray);
+            StartCoroutine(rejectCoroutine);
             _mustReject = false;
         }
     }
@@ -70,7 +71,7 @@ public class ForceUsing : MonoBehaviour
 
 
 
-    private void Reject(Collider[] colliderArray)
+    private IEnumerator RejectCoroutine(Collider[] colliderArray)
     {
         foreach (Collider collider in colliderArray)
         {
@@ -79,8 +80,15 @@ public class ForceUsing : MonoBehaviour
 
             Destroy(collider.GetComponent<FixedJoint>());
             _attachedBodies.Remove(collider.attachedRigidbody);
+        }
+
+        yield return null;
+
+        foreach (Collider collider in colliderArray)
+        {
+            if (collider.gameObject.layer != 3) continue;
+
             collider.attachedRigidbody.AddForce(transform.forward * _rejectForce, ForceMode.Impulse);
-            
         }
     }
 

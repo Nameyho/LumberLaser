@@ -1,4 +1,4 @@
-using System.Collections;
+        using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ public class PlayerLook : MonoBehaviour
     #region fields
 
     private Transform _playerTransform;
-    private Transform _playerCamera;
+    [SerializeField] private Transform _playerCamera;
     
     #endregion fields
 
@@ -37,7 +37,6 @@ public class PlayerLook : MonoBehaviour
     private void Start()
     {
         _playerTransform = transform ;
-        _playerCamera = GameObject.Find("Main Camera").transform;
     }
 
     private void Update()
@@ -60,20 +59,20 @@ public class PlayerLook : MonoBehaviour
 
         
 
-        float minAngle = -90f;
-        float maxAngle = 90f;
 
         var yRotate = LookY * MouseSensitivity ;
         
         
-        yRotate = Mathf.Clamp(yRotate, minAngle, maxAngle);
 
         
         _playerTransform.RotateAround(_playerTransform.position, Vector3.up, MouseSensitivity * LookX);
+        _playerCamera.RotateAround(_playerCamera.position, _playerCamera.right, yRotate);
 
-        //_playerCamera.RotateAround(_playerCamera.position, _playerCamera.right, yRotate);
-
-        
+        // float minAngle = -90f;
+        // float maxAngle = 90f;
+        Vector3 eulerRotation = _playerCamera.rotation.eulerAngles;
+        // eulerRotation.x = Mathf.Clamp(eulerRotation.x, minAngle, maxAngle);
+        // _playerCamera.rotation = Quaternion.Euler(eulerRotation);
     }
 
     #endregion private methods
